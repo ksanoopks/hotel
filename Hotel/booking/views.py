@@ -5,5 +5,4 @@ from .models import Hotel
 
 def home(request):
     hotel= Hotel.objects.all()
-    print(hotel)
     return render(request,"home.html",{"Hotels":hotel})

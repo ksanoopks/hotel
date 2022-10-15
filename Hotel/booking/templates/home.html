@@ -4,41 +4,68 @@
     <meta charset="UTF-8">
     <title>User</title>
 </head>
+<style>
+h1{
+    text-align: center;
+    color:blueviolet;
+}
+td{
+    padding: 15px;
+}
+
+</style>
 <body >
 {%block content%}
 <div class="container">
     <div class="row">
+        <h1>Hotels</h1>
+        <input type="text" name ="" id="myInput" placeholder="Name..." onkeyup="searchFun()">
         
 
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+        <table id ='myTable' class="table table-bordered">
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Location</th>
                 <th scope="col">Hotel Type</th>
                 <th scope="col">description</th>
-                <th scope="col">Hotel Type</th>
+                
                 <th scope="col">Rating</th>
               </tr>
-            </thead>
             {% for hotel in Hotels %}
-            <tbody>
               <tr>
                 
                 <td>{{hotel.name}}</td>
-                <td>{{hotel.Location}}</td>
-                <td>{{hotel.description}}</td>
+                <td>{{hotel.location}}</td>
                 <td>{{hotel.type}}</td>
+                <td>{{hotel.description}}</td>
+                
                 <td>{{hotel.rating}}</td>
                 
               </tr>
-            </tbody>
+              {% endfor %}
           </table>
           
           
+          <script>
+            const searchFun = () => {
+                        let filter =document.getElementById('myInput').value.toUpperCase();
+                        let myTable = document.getElementById('myTable');
+                        let tr = myTable.getElementsByTagName('tr')
+                        for (var i =0 ; i<tr.length;i++){
+                            let td = tr[i].getElementsByTagName('td')[0];
+                            if(td){
+                                let textvalue = td.textContent || td.innerHTML;
+                                if(textvalue.toLocaleUpperCase().indexOf(filter)>-1){
+                                    tr[i].style.display=""
+                                }else{
+                                    tr[i].style.display='none';
+                                }
+                            }
+                        }
+            }
+          </script>
 
 
-{% endfor %}
 
 
     </div>
